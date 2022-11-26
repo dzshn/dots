@@ -1,0 +1,69 @@
+{
+    "layer": "top",
+    "margin-left": 10,
+    "margin-top": 10,
+    "margin-right": 10,
+    "modules-left": ["wlr/workspaces", "custom/media_icon", "custom/media"],
+    "modules-center": ["clock"],
+    "modules-right": ["memory#swap", "memory", "cpu", "temperature", "battery", "pulseaudio", "tray"],
+    "wlr/workspaces": {
+        "format": "<span font_weight=\"bold\">{icon}</span>",
+    },
+    "clock": {
+        "today-format": "<span color=\"#f38ba8\"><b>{}</b></span>",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%a, %b %d %H:%M}"
+    },
+    "cpu": {
+        "format": "{usage}% @{avg_frequency:.2f}GHz"
+    },
+    "temperature": {
+        "format": "{temperatureC}°C",
+    },
+    "memory": {
+        "format": "{avail:.2f}GB/{percentage}%"
+    },
+    "memory#swap": {
+        "format": "{swapAvail:.2f}GB/{swapPercentage}%"
+    },
+    "battery": {
+        "design-capacity": true,
+        "format": "? {capacity}% -{power:.1f}W",
+        "format-charging": "{capacity}% +AC",
+        "format-discharging": "{capacity}% -{power:.1f}J/s",
+        "format-full": "",
+        "format-not-charging": "",
+        "format-time": "{H}h{M}m"
+    },
+    "pulseaudio": {
+        "format": "{volume}%<sup>{icon}</sup>{format_source}",
+        "format-source": ":{volume}%<sup>i</sup>",
+        "format-source-muted": "",
+        "format-icons": {
+            "default": "?",
+            "speaker": "!",
+            "headphone": "",
+        },
+        "on-click-right": "pavucontrol"
+    },
+    "custom/media_icon": {
+        "format": "{icon} {}",
+        "format-icons": {
+            "playing": "",
+            "paused": "",
+            "stopped": "",
+        },
+        "return-type": "json",
+        "exec": "playerctl -a metadata --format '{\"text\":\"<span alpha=\\\"90%\\\">{{duration(position)}}</span>\",\"class\":\"{{lc(status)}}\",\"alt\":\"{{lc(status)}}\"}' -F",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next"
+    },
+    "custom/media": {
+        "format": "{}",
+        "max-length": 56,
+        "return-type": "json",
+        "exec": "~/.config/waybar/media.sh",
+        "on-click": "playerctl play-pause",
+        "on-click-right": "playerctl next"
+    },
+}

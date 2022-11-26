@@ -1,0 +1,7 @@
+gui:
+  showBottomLine: false
+os:
+  editCommand: "hx"
+  editCommandTemplate: "{{editor}} {{filename}}:{{line}}"
+update:
+  method: never

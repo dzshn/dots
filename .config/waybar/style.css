@@ -1,0 +1,104 @@
+@import "./catppuccin.css";
+
+* {
+    font-family: "Fira Code Retina", "Fira Code Nerd Font", "Sarasa Mono J";
+    font-size: 14px;
+}
+
+window#waybar {
+    background: transparent;
+    color: @mocha-text;
+}
+
+widget > * {
+    padding: 0 14px;
+    color: @mocha-text;
+}
+
+widget > image {
+    padding: 0 7px;
+}
+
+label {
+    margin: 0;
+}
+
+tooltip {
+    background: alpha(@mocha-overlay0, 0.8);
+    border-radius: 0;
+}
+tooltip label {
+    color: @mocha-text;
+    padding: 7px;
+}
+
+.modules-center widget > * {
+    padding: 0 14px;
+}
+
+#workspaces {
+    padding: 0;
+    padding-right: 28px;
+}
+#workspaces button {
+    color: @mocha-text;
+    background: alpha(@mocha-base, 0.8);
+    border-radius: 0;
+    padding: 0 6px;
+}
+#workspaces button.focused,
+#workspaces button.active {
+    color: @mocha-base;
+    background: alpha(@mocha-red, 0.8);
+}
+#mode {
+    background: @mocha-lavender;
+    color: @mocha-mantle;
+}
+#clock {
+    color: @mocha-text;
+    background: alpha(@mocha-base, 0.8);
+}
+#cpu {
+    color: @mocha-base;
+    background: @mocha-blue;
+}
+#temperature {
+    color: @mocha-base;
+    background: @mocha-sky;
+}
+#memory {
+    color: @mocha-base;
+    background: @mocha-pink;
+}
+#memory.swap {
+    color: @mocha-base;
+    background: @mocha-teal;
+}
+#battery {
+    color: @mocha-base;
+    background: @mocha-green;
+}
+#pulseaudio {
+    color: @mocha-base;
+    background: @mocha-yellow;
+}
+#tray {
+    background: alpha(@mocha-base, 0.8);
+}
+#custom-media_icon {
+    padding: 0 14px;
+    color: @mocha-base;
+    background: alpha(shade(@mocha-red, 1.1), 0.8);
+}
+#custom-media {
+    padding: 0 14px;
+    color: @mocha-base;
+    background: alpha(@mocha-red, 0.8);
+}
+#custom-media_icon.paused {
+    background: alpha(shade(@mocha-overlay0, 1.1), 0.8);
+}
+#custom-media.paused {
+    background: alpha(@mocha-overlay0, 0.8);
+}

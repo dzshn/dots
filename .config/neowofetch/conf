@@ -1,0 +1,18 @@
+println green neOwOfetchh 🔥
+info white username
+print blue @
+infoln blue hostname
+print white|space=12 uptime:
+infoln red uptime
+print white|space=12 shell:
+infoln blue shell
+print white|space=12 distro:
+infoln blue distro
+print white|space=12 terminal:
+infoln blue terminal
+print white|space=12 WM:
+println blue Hyprland
+print white|space=12 memory:
+info blue memoryUsed
+print white /
+infoln blue memoryAll
