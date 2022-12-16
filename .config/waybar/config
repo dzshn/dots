@@ -3,7 +3,7 @@
     "margin-left": 10,
     "margin-top": 10,
     "margin-right": 10,
-    "modules-left": ["wlr/workspaces", "custom/media_icon", "custom/media"],
+    "modules-left": ["sway/workspaces", "custom/media_icon", "custom/media"],
     "modules-center": ["clock"],
     "modules-right": ["memory#swap", "memory", "cpu", "temperature", "battery", "pulseaudio", "tray"],
     "wlr/workspaces": {

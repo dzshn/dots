@@ -7,10 +7,12 @@ set $term kitty -1
 set $menu wofi -i -d --show=drun
 set $lock waylock --init-color=#181815 --input-color=#313244 --fail-color=#f38ba8
 
+seat seat0 xcursor_theme breeze_cursors 24
+
 include /etc/sway/config.d/*
 include ~/.config/sway/keybinds
 
-output * bg /home/dzshn/.local/share/backgrounds/active fill
+output * bg /home/dzshn/.local/share/backgrounds/rose.jpg fill
 output "HDMI-A-2" {
     max_render_time off
     adaptive_sync off
@@ -27,6 +29,7 @@ floating_modifier $mod normal
 
 default_border pixel 2
 gaps inner 5
+gaps outer 5
 
 client.focused           #f38ba8cc #f38ba8cc #1e1e2eff #f5c2e7ff
 client.unfocused         #1e1e2ecc #1e1e2ecc #c6d0f5ff
@@ -39,4 +42,5 @@ exec swayidle -w \
     before-sleep '$lock'
 
 exec_always fcitx5 -d
-exec_always kanshi
+exec_always light -I
+# exec_always kanshi

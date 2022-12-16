@@ -1,5 +1,5 @@
-bindsym $mod+Return exec $term
-bindsym $mod+Shift+q kill
+bindsym $mod+q exec $term
+bindsym $mod+c kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+b exec killall -USR2 waybar
