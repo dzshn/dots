@@ -1,11 +1,17 @@
 # ~/.*
 
-![Screenshot](screenshot.png)
+**Sway:**
 
-in this image:
+![Screenshot](screenshot_sway.png)
+
+**Hyprland:**
+
+![Screenshot](screenshot_hyprland.png)
+
+in images:
 
 - [python-tetris's cli](https://github.com/dzshn/python-tetris/tree/v1) (I made that!)
-- editor: [helix](https://github.com/helix-editor/helix) (dont mind the code)
+- editor: [helix](https://github.com/helix-editor/helix) on 1st screenshot, nvim on 2nd (dont mind the code)
 - terminal: [kitty](https://github.com/kovidgoyal/kitty)
 - ascii image displayed by [jp2a](https://github.com/Talinx/jp2a)
 - wayland compositor: [hyprland](https://github.com/hyprwm/Hyprland)
