@@ -1,7 +1,7 @@
 [ $UID -eq 0 ] && ZSH_DISABLE_COMPFIX="true"
 
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="clean"
+ZSH_THEME="meow"
 DISABLE_AUTO_TITLE="true"
 ZSH_PYENV_QUIET="true"
 COMPLETION_WAITING_DOTS="true"
