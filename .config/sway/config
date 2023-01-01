@@ -44,3 +44,4 @@ exec swayidle -w \
 exec_always fcitx5 -d
 exec_always light -I
 # exec_always kanshi
+exec_always lxpolkit

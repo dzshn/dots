@@ -11,7 +11,6 @@ Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 let g:coc_global_extensions = [
     \ 'coc-eslint',
     \ 'coc-json',
-    \ 'coc-lists',
     \ 'coc-prettier',
     \ 'coc-pyright',
     \ 'coc-sh',
@@ -32,6 +31,8 @@ Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
 " Plug 'junegunn/fzf'  " arch's fzf already has this
 Plug 'junegunn/fzf.vim'
+
+Plug 'andweeb/presence.nvim'
 call plug#end()
 
 colorscheme catppuccin-mocha
@@ -53,9 +54,13 @@ let NERDTreeMinimalUI = 1
 let g:vim_svelte_plugin_use_typescript = 1
 
 let g:ale_fixers = {
-\   'javascript': [
-\       'eslint'
-\   ]
+\   'javascript': ['eslint'],
+\   'typescript': ['eslint'],
+\   'python': ['autoflake', 'autoimport', 'black', 'isort'],
+\ }
+
+let g:ale_linters = {
+\   'python': ['flake8', 'mypy', 'pydocstyle']
 \ }
 
 set signcolumn=yes
@@ -102,3 +107,9 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+augroup nvim_term
+    autocmd!
+    autocmd TermOpen * startinsert
+    autocmd TermOpen * setlocal nonumber signcolumn=no
+augroup END

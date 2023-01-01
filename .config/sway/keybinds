@@ -5,6 +5,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+b exec killall -USR2 waybar
 bindsym $mod+Shift+e exec swaynag -t warning -m '*really* quit sway?' -B 'yea' 'swaymsg exit'
 bindsym $mod+Shift+w exec splatmoji copy
+bindsym $mod+Ctrl+l exec killall -USR1 swayidle
 
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
