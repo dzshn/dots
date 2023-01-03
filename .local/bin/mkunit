@@ -1,0 +1,122 @@
+#!/bin/python3
+
+"""Create a minimal systemd unit file."""
+
+import os
+import shutil
+import shlex
+import sys
+from pathlib import Path
+
+
+CSI = "\x1b["
+
+RED = CSI + "31m"
+GREEN = CSI + "32m"
+BLUE = CSI + "34m"
+RESET = CSI + "0m"
+
+
+def ask(prompt: str, default: str = "") -> str:
+    res = input(f"{BLUE}{prompt} {BLUE}[{GREEN}{default}{CSI}34m]: {RESET}")
+    return res.strip() or default
+
+
+def confirm(prompt: str, default: str = "yes") -> bool:
+    return ask(prompt + " (yes/no)", default) in {"y", "yes"}
+
+
+def main() -> None:
+    try:
+        filename = ask("Unit file name")
+        if "/" in filename:
+            sys.exit("nop")
+        if not filename.endswith(".service"):
+            filename += ".service"
+
+        unit_desc = ask("Description", filename.removesuffix(".service"))
+
+        service_type = ask("Type (simple, oneshot, etc.)", "simple")
+        while True:
+            service_exec = ask("Command")
+            if not service_exec:
+                break
+            binary, *_ = shlex.split(service_exec)
+            if shutil.which(binary) or Path(binary).expanduser().exists():
+                break
+            print(f"{RED}Can't find {binary}")
+        service_restart = ask(
+            "Restart method (always, on-failure, etc.)", "always"
+        )
+
+        install_target = ask("Install target", "default.target")
+
+    except (KeyboardInterrupt, EOFError):
+        print()
+        sys.exit()
+
+    sections = {
+        "Unit": {
+            "Description": unit_desc,
+        },
+        "Service": {
+            "Type": service_type,
+            "Restart": service_restart,
+        },
+        "Install": {
+            "WantedBy": install_target,
+        }
+    }
+
+    if service_exec:
+        binary, *args = shlex.split(service_exec)
+        resolved = shutil.which(binary)
+        if not resolved:
+            resolved = str(Path(binary).expanduser().resolve())
+
+        sections["Service"]["ExecStart"] = resolved
+
+    file_src = ""
+    for name, options in sections.items():
+        file_src += f"[{name}]\n"
+        for opt, val in options.items():
+            file_src += f"{opt}={val}\n"
+        file_src += "\n"
+
+    file_src = file_src.strip("\n") + "\n"
+
+    print(f"\n{BLUE}Generated file{RESET}")
+    print(file_src)
+
+    if not confirm("Install it to ~/.config/systemd/user?"):
+        return
+
+    file_path = Path("~/.config/systemd/user").expanduser() / filename
+
+    with file_path.open("x") as f:
+        f.write(file_src)
+
+    if confirm("Edit file?", "no"):
+        editor = os.getenv("EDITOR")
+        if not editor:
+            editor = ask("($EDITOR is unset) editor", "vim")
+
+        os.spawnlp(os.P_WAIT, editor, editor, str(file_path))
+
+    if not confirm("Enable unit now?", "no"):
+        return
+
+    os.spawnlp(
+        os.P_WAIT, "systemctl", "systemctl", "--user", "enable", filename
+    )
+
+    if not confirm("Start it?", "no"):
+        return
+
+    os.spawnlp(
+        os.P_WAIT, "systemctl", "systemctl", "--user", "start", filename
+    )
+
+
+if __name__ == "__main__":
+    main()
