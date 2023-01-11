@@ -7,6 +7,8 @@ Plug 'catppuccin/nvim', { 'as': 'catppuccin' }  " :3
 Plug 'ryanoasis/vim-devicons'
 Plug 'vim-airline/vim-airline'
 
+Plug 'editorconfig/editorconfig-vim'
+Plug 'tpope/vim-sleuth'
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 let g:coc_global_extensions = [
     \ 'coc-eslint',
@@ -26,13 +28,18 @@ Plug 'dense-analysis/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-fugitive'
 
-Plug 'preservim/nerdcommenter'
 Plug 'preservim/nerdtree'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-rsi'
+Plug 'tpope/vim-commentary'
+
 " Plug 'junegunn/fzf'  " arch's fzf already has this
 Plug 'junegunn/fzf.vim'
+Plug 'kdheepak/lazygit.nvim'
 
 Plug 'andweeb/presence.nvim'
+
+Plug 'tpope/vim-afterimage'
 call plug#end()
 
 colorscheme catppuccin-mocha
@@ -56,32 +63,33 @@ let g:vim_svelte_plugin_use_typescript = 1
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'typescript': ['eslint'],
+\   'typescriptreact': ['eslint'],
 \   'python': ['autoflake', 'autoimport', 'black', 'isort'],
 \ }
 
 let g:ale_linters = {
-\   'python': ['flake8', 'mypy', 'pydocstyle']
+\   'python': ['flake8', 'mypy']
 \ }
 
-set signcolumn=yes
-set number
-set wrap
-set noshowmode
+set signcolumn=yes number relativenumber wrap noshowmode
 
 set splitbelow splitright
-set tabstop=4 softtabstop=4 expandtab shiftwidth=4 smarttab
 set mouse=a
 set clipboard=unnamedplus
 set foldmethod=syntax
 set foldlevel=99
 
+set ignorecase smartcase
+
 let mapleader = ","
+
+nnoremap <leader>gg :LazyGit<CR>
 
 nnoremap <leader>nn :NERDTreeVCS<CR>
 nnoremap <leader>nc :NERDTreeClose<CR>
 
 " Fold/unfold code
-nnoremap <space> za 
+nnoremap <space> za
 
 " Completion menu binds
 "   <c-space> to trigger
@@ -98,6 +106,8 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+command -nargs=0 Rename :call CocActionAsync("rename")
 
 " Open new files
 noremap <C-n> :execute("FZF")<CR>
